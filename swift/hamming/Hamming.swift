@@ -1,13 +1,6 @@
 class Hamming {
-    static func compute(_ first: String, against second: String) -> Int? {
-        guard first.characters.count == second.characters.count else {
-            // Hamming distance is undefined for strands of different length
-            return nil
-        }
-
-        return first.characters.enumerated().map { (idx, char) -> Int in
-            let secondChar = second[second.index(second.startIndex, offsetBy: idx)]
-            return char != secondChar ? 1 : 0
-        }.reduce(0, combine: +)
+    static func compute(_ base: String, against: String) -> Int? {
+        guard base.characters.count == against.characters.count else { return nil }
+        return base.characters.indices.map { base[$0] != against[$0] ? 1 : 0 }.reduce(0, combine: +)
     }
 }
