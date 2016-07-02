@@ -18,14 +18,14 @@ struct PhoneNumber {
     }
 
     var areaCode: String {
-        return number.substring(fromPos: 0, toPos: 3)
+        return String(number.characters.prefix(3))
     }
 }
 
 extension PhoneNumber: CustomStringConvertible {
     var description: String {
-        let firstBlock = number.substring(fromPos: 3, toPos: 6)
-        let secondBlock = number.substring(fromPos: 6, toPos: 10)
+        let firstBlock = String(number.characters.suffix(7).prefix(3))
+        let secondBlock = String(number.characters.suffix(4))
         return "(\(areaCode)) \(firstBlock)-\(secondBlock)"
     }
 }
@@ -35,10 +35,5 @@ extension String {
         let allowedChars = Set("0123456789".characters)
         let str = self.characters.filter { allowedChars.contains($0) }
         return String(str)
-    }
-
-    // This is not ideal. But Swift 3's String API if kinda verbose :/
-    func substring(fromPos: Int, toPos: Int) -> String {
-        return self.substring(with: self.index(self.startIndex, offsetBy: fromPos)..<self.index(self.startIndex, offsetBy: toPos))
     }
 }
