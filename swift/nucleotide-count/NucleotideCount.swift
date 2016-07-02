@@ -4,9 +4,7 @@ struct DNA {
     init?(strand: String) {
         var nucleotides = [DNANucleotide]()
         for nucleotideString in (strand.characters.map{String($0)}) {
-            guard let nucleotide = DNANucleotide(rawValue: nucleotideString) else {
-                return nil
-            }
+            guard let nucleotide = DNANucleotide(rawValue: nucleotideString) else { return nil }
             nucleotides.append(nucleotide)
         }
         self.strand = nucleotides
@@ -16,6 +14,12 @@ struct DNA {
         // force-unwrapping the following is uncool, but the
         // tests don't take my awesome enum into regard :D
         let nucleotide = DNANucleotide(rawValue: nucleotide)!
+        return count(nucleotide)
+    }
+
+    // This is how it should look, because then you can
+    // do nifty things like this: dna.count(.adenine)
+    func count(_ nucleotide: DNANucleotide) -> Int {
         return strand.filter{ $0 == nucleotide }.count
     }
 
@@ -29,5 +33,5 @@ struct DNA {
 }
 
 enum DNANucleotide: String {
-    case A, C, G, T
+    case adenine = "A", cytosine = "C", guanine = "G", thymine = "T"
 }
