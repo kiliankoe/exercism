@@ -10,9 +10,9 @@ struct NumberClassifier {
     var classification: NumberClassification {
         let factorSum = number.factors.reduce(0, combine: +)
         switch number - factorSum {
-        case let diff where diff < 0:
+        case Int.min..<0:
             return .abundant
-        case let diff where diff > 0:
+        case 1..<Int.max:
             return .deficient
         default:
             return .perfect
