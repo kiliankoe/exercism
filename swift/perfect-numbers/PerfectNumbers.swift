@@ -1,9 +1,7 @@
-enum NumberClassification {
-    case perfect
-    case abundant
-    case deficient
+enum NumberClassifier {
+    case perfect, abundant, deficient
 
-    init(for number: Int) {
+    init(number: Int) {
         let factorSum = number.factors.reduce(0, combine: +)
         switch number - factorSum {
         case Int.min..<0:
@@ -14,13 +12,11 @@ enum NumberClassification {
             self = .perfect
         }
     }
-}
 
-struct NumberClassifier {
-    let number: Int
-
-    var classification: NumberClassification {
-        return NumberClassification(for: number)
+    // Only really needed since the tests are looking for a property,
+    // we could just use `self` otherwise.
+    var classification: NumberClassifier {
+        return self
     }
 }
 
