@@ -2,21 +2,25 @@ enum NumberClassification {
     case perfect
     case abundant
     case deficient
+
+    init(for number: Int) {
+        let factorSum = number.factors.reduce(0, combine: +)
+        switch number - factorSum {
+        case Int.min..<0:
+            self = .abundant
+        case 1..<Int.max:
+            self = .deficient
+        default:
+            self = .perfect
+        }
+    }
 }
 
 struct NumberClassifier {
     let number: Int
 
     var classification: NumberClassification {
-        let factorSum = number.factors.reduce(0, combine: +)
-        switch number - factorSum {
-        case Int.min..<0:
-            return .abundant
-        case 1..<Int.max:
-            return .deficient
-        default:
-            return .perfect
-        }
+        return NumberClassification(for: number)
     }
 }
 
