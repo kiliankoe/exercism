@@ -22,7 +22,9 @@ struct NumberClassifier {
 
 extension Int {
     var factors: [Int] {
-        let upperBound = self / 2
+        if self == 0 { return [] }
+        if abs(self) == 1 { return [1] }
+        let upperBound = abs(self) / 2
         return (1...upperBound).filter { self % $0 == 0 }
     }
 }
