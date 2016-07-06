@@ -1,6 +1,5 @@
 struct Allergies {
-
-    enum type: Int {
+    enum type: UInt {
         case eggs = 1
         case peanuts = 2
         case shellfish = 4
@@ -11,27 +10,13 @@ struct Allergies {
         case cats = 128
     }
 
-    let identifier: Int
+    let identifier: UInt
 
-    init(_ id: Int) {
+    init(_ id: UInt) {
         identifier = id
     }
 
     func hasAllergy(_ type: Allergies.type) -> Bool {
-        return identifier.fittingMultiplesOfTwo.contains(type.rawValue)
-    }
-}
-
-extension Int {
-    var fittingMultiplesOfTwo: [Int] {
-        var current = self
-        let values = [128, 64, 32, 16, 8, 4, 2, 1]
-        return values.filter {
-            if $0 <= current {
-                current -= $0
-                return true
-            }
-            return false
-        }
+        return identifier & type.rawValue != 0
     }
 }
