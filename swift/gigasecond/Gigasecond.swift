@@ -6,6 +6,7 @@ struct Gigasecond {
     private let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        df.timeZone = TimeZone(abbreviation: "UTC")
         return df
     }()
 
