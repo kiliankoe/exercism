@@ -8,7 +8,7 @@ struct Triangle {
     private func sanityCheck() -> Bool {
         let (a, b, c) = sides
 
-        // All sides must have a size
+        // All sides must have a length > 0
         guard a > 0,
               b > 0,
               c > 0
@@ -23,16 +23,20 @@ struct Triangle {
         return true
     }
 
+    enum Kind: String {
+        case Equilateral, Isosceles, Scalene, ErrorKind
+    }
+
     var kind: String {
-        guard sanityCheck() else { return "ErrorKind" }
+        guard sanityCheck() else { return Kind.ErrorKind.rawValue }
 
         switch sides {
         case (let a, let b, let c) where a == b && b == c:
-            return "Equilateral"
+            return Kind.Equilateral.rawValue
         case (let a, let b, let c) where a != b && a != c && b != c:
-            return "Scalene"
+            return Kind.Scalene.rawValue
         default:
-            return "Isosceles"
+            return Kind.Isosceles.rawValue
         }
     }
 }
