@@ -1,20 +1,10 @@
 class Hamming
-  def self.compute(a, b)
-    if a.length != b.length
-      raise ArgumentError
-    elsif a == b
-      return 0
-    end
+  def self.compute(strand_a, strand_b)
+    raise ArgumentError unless strand_a.length == strand_b.length
 
-    diff = 0
-    pairs = a.split("").zip(b.split(""))
-    pairs.each do |pair|
-      if pair[0] != pair[1]
-        diff += 1
-      end
+    strand_a.each_char.with_index.count do |char, idx|
+      char != strand_b[idx]
     end
-
-    return diff
   end
 end
 
