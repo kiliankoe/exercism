@@ -7,9 +7,7 @@ class Complement
   }
 
   def self.of_dna(dna)
-    if dna !~ /^([ACGT]+)$/
-      return ''
-    end
+    return '' unless dna =~ /^([ACGT]+)$/
     dna.chars.map { |c| @@transcription[c] }.join
   end
 end
