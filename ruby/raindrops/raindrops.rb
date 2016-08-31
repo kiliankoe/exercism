@@ -31,14 +31,9 @@ class Raindrops
   end
 
   def self.convert_single(num)
-    if num == 3
-      return 'Pling'
-    elsif num == 5
-      return 'Plang'
-    elsif num == 7
-      return 'Plong'
-    end
-    return ''
+    return 'Pling' if num == 3
+    return 'Plang' if num == 5
+    return 'Plong' if num == 7
   end
 end
 
