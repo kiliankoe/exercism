@@ -1,14 +1,9 @@
 class Complement
-  @@transcription = {
-    'G' => 'C',
-    'C' => 'G',
-    'T' => 'A',
-    'A' => 'U'
-  }
+  TRANSCRIPTIONS = { 'G' => 'C', 'C' => 'G', 'T' => 'A', 'A' => 'U' }
 
   def self.of_dna(dna)
-    return '' unless dna =~ /^([ACGT]+)$/
-    dna.chars.map { |c| @@transcription[c] }.join
+    rna = dna.chars.map { |c| TRANSCRIPTIONS[c] }
+    rna.include?(nil) ? '' : rna.join
   end
 end
 
