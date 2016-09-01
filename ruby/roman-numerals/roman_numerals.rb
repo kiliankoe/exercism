@@ -1,5 +1,4 @@
 class Integer
-
   ROMAN_NUMERALS = {
     1 => 'I',
     4 => 'IV',
@@ -14,7 +13,7 @@ class Integer
     500 => 'D',
     900 => 'CM',
     1000 => 'M'
-  }
+  }.freeze
 
   def to_roman
     value = self
