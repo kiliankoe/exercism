@@ -1,7 +1,7 @@
 class Bob
   def hey(remark)
     remark.delete!("\n")
-    if remark == remark.upcase && remark.match(/[A-Z]/)
+    if remark == remark.upcase && remark =~ /[A-Z]/
       'Whoa, chill out!'
     elsif remark =~ /\?$/
       'Sure.'
