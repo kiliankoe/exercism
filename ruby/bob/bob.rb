@@ -1,13 +1,14 @@
 class Bob
   def hey(remark)
     remark.gsub!(/\n/, '')
-    if remark == remark.upcase && remark.match(/[a-zA-Z]/)
-      return 'Whoa, chill out!'
+    if remark == remark.upcase && remark.match(/[A-Z]/)
+      'Whoa, chill out!'
     elsif remark.match(/\?$/)
-      return 'Sure.'
-    elsif remark.strip == ''
-      return 'Fine. Be that way!'
+      'Sure.'
+    elsif remark.strip.empty?
+      'Fine. Be that way!'
+    else
+      'Whatever.'
     end
-    'Whatever.'
   end
 end
