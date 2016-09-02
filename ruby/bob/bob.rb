@@ -1,9 +1,9 @@
 class Bob
   def hey(remark)
-    remark.gsub!(/\n/, '')
+    remark.delete!("\n")
     if remark == remark.upcase && remark.match(/[A-Z]/)
       'Whoa, chill out!'
-    elsif remark.match(/\?$/)
+    elsif remark =~ /\?$/
       'Sure.'
     elsif remark.strip.empty?
       'Fine. Be that way!'
