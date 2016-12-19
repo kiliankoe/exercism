@@ -2,5 +2,7 @@
 
 (defn hello
  ([] "Hello, World!")
- ([name] (str "Hello, " name "!"))
+ ([name] (if (clojure.string/blank? name)
+  "Hello, World!"
+  (str "Hello, " name "!")))
 )
