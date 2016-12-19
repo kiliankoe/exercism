@@ -1,1 +1,6 @@
 *.pyc
+
+# Clojure
+.lein-failures
+.lein-repl-history
+target/
