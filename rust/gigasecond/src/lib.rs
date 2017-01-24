@@ -1,11 +1,9 @@
 extern crate chrono;
 
-use chrono::datetime::DateTime;
-use chrono::offset::utc::UTC;
-use chrono::duration::Duration;
+use chrono::{DateTime, TimeZone, Duration};
 
 const GIGASECOND: i64 = 1_000_000_000;
 
-pub fn after(datetime: DateTime<UTC>) -> DateTime<UTC> {
+pub fn after<T: TimeZone>(datetime: DateTime<T>) -> DateTime<T> {
     datetime + Duration::seconds(GIGASECOND)
 }
