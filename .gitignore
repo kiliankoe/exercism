@@ -7,3 +7,7 @@ target/
 
 # JS
 node_modules/
+
+# Kotlin
+.gradle/
+build/
