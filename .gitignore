@@ -4,3 +4,6 @@
 .lein-failures
 .lein-repl-history
 target/
+
+# JS
+node_modules/
