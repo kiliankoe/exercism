@@ -1,33 +1,26 @@
 import Foundation
 
 extension String {
-    fileprivate var isQuestion: Bool {
-        guard let last = self.characters.last else { return false }
-        return last == "?"
+    fileprivate var isBlank: Bool {
+        return self.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    fileprivate var isScreamed: Bool {
-        let numsAndPunctuation = CharacterSet
-            .decimalDigits
-            .union(.punctuationCharacters)
-            .union(.whitespacesAndNewlines)
+    fileprivate var isQuestion: Bool {
+        return self.hasSuffix("?")
+    }
 
-        let lettersOnly = self.trimmingCharacters(in: numsAndPunctuation)
-        if lettersOnly.isEmpty { return false }
-        return lettersOnly == lettersOnly.uppercased()
+    fileprivate var isShouted: Bool {
+        return self == self.uppercased() && self != self.lowercased()
     }
 }
 
 enum Bob {
     static func hey(_ input: String) -> String {
-        let input = input
-            .trimmingCharacters(in: .whitespaces)
-
-        if input.isEmpty {
+        if input.isBlank {
             return "Fine, be that way."
         }
 
-        if input.isScreamed {
+        if input.isShouted {
             return "Woah, chill out!"
         }
 
