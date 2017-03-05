@@ -1,3 +1,5 @@
+import Foundation
+
 enum Grains {
     enum GrainsError: Error {
         case inputTooHigh(String)
@@ -20,12 +22,7 @@ enum Grains {
             return 1
         }
 
-        if grains == 64 {
-            // Can't find a good solution to circumvent overflowing :/
-            return 9_223_372_036_854_775_808
-        }
-
-        return UInt64(2 << (grains - 2))
+        return UInt64(pow(2, Double(grains - 1)))
     }
 
     static var total: UInt64 {
