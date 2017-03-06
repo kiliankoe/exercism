@@ -19,11 +19,11 @@ struct Clock {
     }
 
     func add(minutes: Int) -> Clock {
-        return Clock(hours: self.hour, minutes: self.minute + minutes)
+        return Clock(minutes: self.minute + minutes)
     }
 
     func subtract(minutes: Int) -> Clock {
-        return Clock(hours: self.hour, minutes: self.minute - minutes)
+        return Clock(minutes: self.minute - minutes)
     }
 }
 
