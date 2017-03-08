@@ -11,3 +11,6 @@ node_modules/
 # Kotlin
 .gradle/
 build/
+
+# Java
+*.class
