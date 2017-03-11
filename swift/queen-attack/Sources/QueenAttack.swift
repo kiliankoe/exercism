@@ -41,24 +41,14 @@ struct Queens {
     }
 
     var canAttack: Bool {
-        // same row or column
-        if _white.0 == _black.0 || _white.1 == _black.1 { return true }
+        let rowDiff = _white.row - _black.row
+        let colDiff = _white.col - _black.col
 
-        // diagonal
         return
-            search(towards: .NW) ||
-            search(towards: .NE) ||
-            search(towards: .SE) ||
-            search(towards: .SW)
-    }
-
-    private func search(towards: DiagonalDirection) -> Bool {
-        var searchPos = _white
-        while 0...7 ~= searchPos.row && 0...7 ~= searchPos.col {
-            if searchPos == _black { return true }
-            move(pos: &searchPos, towards: towards)
-        }
-        return false
+            _white.row == _black.row ||
+            _white.col == _black.col ||
+            rowDiff == colDiff ||
+            rowDiff + colDiff == 0
     }
 }
 
@@ -77,22 +67,5 @@ extension Queens: CustomStringConvertible {
             rows.append(rowData.joined(separator: " "))
         }
         return rows.joined(separator: "\n")
-    }
-}
-
-fileprivate enum DiagonalDirection {
-    case NW, NE, SE, SW
-}
-
-fileprivate func move(pos: inout Position, towards direction: DiagonalDirection) {
-    switch direction {
-    case .NW:
-        pos = (row: pos.row - 1, col: pos.col - 1)
-    case .NE:
-        pos = (row: pos.row - 1, col: pos.col + 1)
-    case .SE:
-        pos = (row: pos.row + 1, col: pos.col + 1)
-    case .SW:
-        pos = (row: pos.row + 1, col: pos.col - 1)
     }
 }
