@@ -4,7 +4,7 @@ struct SimulatedRobot {
         case north = 0, east, south, west
     }
 
-    enum Instruction: String {
+    enum Instruction: Character {
         case TurnRight = "R"
         case TurnLeft = "L"
         case Advance = "A"
@@ -58,7 +58,7 @@ struct SimulatedRobot {
     func instructions(_ instr: String) -> [Instruction] {
         return instr
             .characters
-            .map { Instruction(rawValue: String($0)) }
+            .map { Instruction(rawValue: $0) }
             .flatMap { $0 }
     }
 
