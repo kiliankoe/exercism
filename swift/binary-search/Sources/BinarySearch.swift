@@ -21,20 +21,21 @@ struct BinarySearch {
     }
 
     func searchFor(_ query: Int) -> Int? {
-        var searchPos = self.middle
+        var maxIdx = list.count - 1
+        var minIdx = 0
+        var searchPos: Int
 
-        while true {
-            if list[searchPos] == query { return searchPos }
-
-            // this should be 0..<list.count imo, but that leads to an infinite loop
-            // this "workaround" passes all but one test :/
-            guard 1..<list.count ~= searchPos else { return nil }
+        while maxIdx != minIdx {
+            searchPos = (maxIdx + minIdx) / 2
+            if query == list[searchPos] { return searchPos }
 
             if query > list[searchPos] {
-                searchPos += (list.count - searchPos) / 2
+                minIdx = searchPos + 1
             } else {
-                searchPos -= (list.count - searchPos) / 2
+                maxIdx = searchPos - 1
             }
         }
+        
+        return nil
     }
 }
