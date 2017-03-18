@@ -11,7 +11,7 @@ struct SimulatedRobot {
     }
 
     var bearing = Direction.north
-    private var location = (x: 0, y: 0)
+    var location = (x: 0, y: 0)
 
     // I'm sticking with a tuple for internal use, since that feels cleaner and less prone to errors.
     var coordinates: [Int] {
@@ -58,8 +58,7 @@ struct SimulatedRobot {
     func instructions(_ instr: String) -> [Instruction] {
         return instr
             .characters
-            .map { Instruction(rawValue: $0) }
-            .flatMap { $0 }
+            .flatMap { Instruction(rawValue: $0) }
     }
 
     mutating func evaluate(_ instr: String) {
