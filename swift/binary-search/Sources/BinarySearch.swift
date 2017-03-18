@@ -2,40 +2,38 @@ enum BinarySearchError: Error {
     case unsorted
 }
 
-struct BinarySearch {
+struct BinarySearch<T: Comparable> {
     enum Position {
         case middle
     }
 
-    let list: [Int]
+    let list: [T]
 
     var middle: Int {
         return list.count / 2
     }
 
-    init(_ list: [Int]) throws {
+    init(_ list: [T]) throws {
         guard list == list.sorted() else {
             throw BinarySearchError.unsorted
         }
         self.list = list
     }
 
-    func searchFor(_ query: Int) -> Int? {
-        var maxIdx = list.count - 1
-        var minIdx = 0
-        var searchPos: Int
+    func searchFor(_ query: T) -> Int? {
+        return binarySearch(query: query, min: 0, max: list.count - 1)
+    }
 
-        while maxIdx != minIdx {
-            searchPos = (maxIdx + minIdx) / 2
-            if query == list[searchPos] { return searchPos }
+    private func binarySearch(query: T, min: Int, max: Int) -> Int? {
+        guard max != min else { return nil }
 
-            if query > list[searchPos] {
-                minIdx = searchPos + 1
-            } else {
-                maxIdx = searchPos - 1
-            }
+        let middle = (max + min) / 2
+        if query == list[middle] { return middle }
+
+        if query > list[middle] {
+            return binarySearch(query: query, min: middle + 1, max: max)
+        } else {
+            return binarySearch(query: query, min: min, max: middle - 1)
         }
-        
-        return nil
     }
 }
