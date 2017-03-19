@@ -2,28 +2,38 @@ enum ListKind {
     case equal, unequal, sublist, superlist
 }
 
-// This rather stupid implementation has obvious flaws. It breaks if a sublist has other 
-// values shoved in between, something the readme doesn't make clear as a requirement :/
-// But that's good enough for 14/17 tests, so an ok first try I guess? ¯\_(ツ)_/¯
-
 func classifier(listOne: [Int], listTwo: [Int]) -> ListKind {
-    if listOne == listTwo { return .equal }
-    if listOne.isEmpty && !listTwo.isEmpty { return .sublist }
-    if listTwo.isEmpty && !listOne.isEmpty { return .superlist }
-
-    if listTwo.count >= listOne.count {
-        guard let firstIdx = listTwo.index(of: listOne[0]) else { return .unequal }
-        for (idx, el) in listOne.enumerated() {
-            guard idx > firstIdx else { continue }
-            guard el == listTwo[idx] else { return .unequal }
-        }
+    if listOne == listTwo {
+        return .equal
+    } else if listOne.isSublist(of: listTwo) {
         return .sublist
-    } else {
-        guard let firstIdx = listOne.index(of: listTwo[0]) else { return .unequal }
-        for (idx, el) in listTwo.enumerated() {
-            guard idx > firstIdx else { continue }
-            guard el == listOne[idx] else { return .unequal }
-        }
+    } else if listTwo.isSublist(of: listOne) {
         return .superlist
+    }
+    return .unequal
+}
+
+extension Array where Element: Comparable {
+    func isSublist(of other: [Element]) -> Bool {
+        guard self.count < other.count else { return false }
+
+        var idx = 0
+        var selfIdx = 0
+        var otherIdx = 0
+        while otherIdx <= other.count - self.count {
+            while selfIdx < self.count && self[selfIdx] == other[otherIdx] {
+                selfIdx += 1
+                otherIdx += 1
+            }
+            if selfIdx == self.count {
+                return true
+            }
+
+            idx += 1
+            selfIdx = 0
+            otherIdx = idx
+        }
+
+        return false
     }
 }
