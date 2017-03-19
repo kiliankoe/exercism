@@ -4,7 +4,7 @@ import XCTest
 class SublistTests: XCTestCase {
     func testEmptyLists() {
 
-        XCTAssertEqual(.equal, classifier(listOne: [], listTwo: []) )
+        XCTAssertEqual(.equal, classifier(listOne: [] as [Int], listTwo: [] as [Int]) )
     }
 
     func testEmptyListWithinNonEmptyList() {

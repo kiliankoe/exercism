@@ -2,7 +2,10 @@ enum ListKind {
     case equal, unequal, sublist, superlist
 }
 
-func classifier(listOne: [Int], listTwo: [Int]) -> ListKind {
+// This actually breaks the very first test `testEmptyLists` since the type of two empty
+// lists can't be inferred to be `[Equatable]`. It's fine with an explicit type, so I'm 
+// going to leave this generic.
+func classifier<T: Equatable>(listOne: [T], listTwo: [T]) -> ListKind {
     if listOne == listTwo {
         return .equal
     } else if listOne.isSublist(of: listTwo) {
@@ -13,7 +16,7 @@ func classifier(listOne: [Int], listTwo: [Int]) -> ListKind {
     return .unequal
 }
 
-extension Array where Element: Comparable {
+extension Array where Element: Equatable {
     func isSublist(of other: [Element]) -> Bool {
         guard self.count < other.count else { return false }
 
