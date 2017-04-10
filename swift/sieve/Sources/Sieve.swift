@@ -6,20 +6,12 @@ struct Sieve {
     }
 
     var primes: [Int] {
-        var primeCandidates = Array<Int>(2...upperBound)
-        var primes = [Int]()
+        return sieve(Array(2...upperBound))
+    }
 
-        while true {
-            guard primeCandidates.count > 0 else { break }
-
-            let current = primeCandidates.removeFirst()
-            primes.append(current)
-
-            primeCandidates = primeCandidates.filter {
-                $0 % current != 0
-            }
-        }
-
-        return primes
+    private func sieve(_ list: [Int]) -> [Int] {
+        guard !list.isEmpty else { return [] }
+        let (head, tail) = (list[0], list[1..<list.count])
+        return [head] + sieve(tail.filter { $0 % head != 0 })
     }
 }
