@@ -1,3 +1,7 @@
+# VS Code
+.vscode
+
+# Python
 *.pyc
 
 # Clojure
@@ -8,9 +12,11 @@ target/
 # JS
 node_modules/
 
-# Kotlin
+# Java/Kotlin
 .gradle/
 build/
-
-# Java
 *.class
+*.classpath
+kotlin/*/.settings
+kotlin/*/bin
+.project
