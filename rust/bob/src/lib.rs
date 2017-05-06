@@ -27,7 +27,7 @@ impl<'a> From<&'a str> for PhraseKind {
             return PhraseKind::Empty
         } else if phrase == phrase.to_uppercase() {
             return PhraseKind::Shout
-        } else if phrase.to_string().pop() == Some('?') {
+        } else if phrase.ends_with("?") {
             return PhraseKind::Question
         }
         PhraseKind::Normal
