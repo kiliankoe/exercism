@@ -8,10 +8,6 @@ pub fn verse(num: u8) -> String {
 }
 
 pub fn sing(begin: u8, end: u8) -> String {
-    if end > begin {
-        return "".to_string();
-    }
-
     let mut verses = Vec::<String>::new();
     for verse_num in (end..begin+1).rev() {
         verses.push(verse(verse_num));
