@@ -1,14 +1,12 @@
-def to_rna(dna_strand):
-    return ''.join(map(_single_to_rna, dna_strand))
+nucleotides = {
+    'C': 'G',
+    'G': 'C',
+    'T': 'A',
+    'A': 'U',
+}
 
-def _single_to_rna(dna):
-    nucleotides = {
-        'C': 'G',
-        'G': 'C',
-        'T': 'A',
-        'A': 'U',
-    }
-    if dna in nucleotides:
-        return nucleotides.get(dna)
-    else:
+def to_rna(dna_strand):
+    try:
+        return ''.join([nucleotides[char] for char in dna_strand])
+    except KeyError:
         raise ValueError('invalid nucleotide')
