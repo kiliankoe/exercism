@@ -20,3 +20,5 @@ build/
 kotlin/*/.settings
 kotlin/*/bin
 .project
+.cache
+*.out*
