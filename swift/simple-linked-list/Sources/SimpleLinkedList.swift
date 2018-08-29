@@ -25,18 +25,9 @@ class Element<Value> {
         return [value] + next.toArray()
     }
 
-    func reverseElements() -> Element {
-        var current: Element? = self
-        var previous: Element? = nil
-        var next: Element?
-
-        while current != nil {
-            next = current?.next
-            current?.next = previous
-            previous = current
-            current = next
-        }
-
-        return previous!
+    func reverseElements(previous: Element? = nil) -> Element {
+        defer { self.next = previous }
+        guard let next = self.next else { return self }
+        return next.reverseElements(previous: self)
     }
 }
