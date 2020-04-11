@@ -1,3 +1,6 @@
+# Xcode
+**/*/xcuserdata/
+
 # VS Code
 .vscode
 
@@ -22,3 +25,6 @@ kotlin/*/bin
 .project
 .cache
 *.out*
+
+# Exercism
+**/*/.exercism
